@@ -519,7 +519,7 @@ INT wifi_getRadioMaxBitRate(INT radioIndex, CHAR *output_string)	//RDKB
 	
     apIndex=(radioIndex==0)?0:1;
 
-    rc = sprintf_s(cmd, sizeof(cmd), "iwconfig %s%d | grep \"Bit Rate\" | cut -d':' -f2 | cut -d' ' -f1,2", AP_PREFIX, apIndex);
+    rc = sprintf_s(cmd, sizeof(cmd), "iwconfig %s%d %s | grep \"Bit Rate\" | cut -d':' -f2 | cut -d' ' -f1,2", AP_PREFIX, apIndex);
     if(rc < EOK)
     {
         ERR_CHK(rc);
