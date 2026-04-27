@@ -85,7 +85,11 @@ int mta_hal_InitDB (void)
        The code should ensure that that doesn't cause problems.
     */
     static int initdone = 0;
-
+/* ----------- INTENTIONAL MEMORY LEAK FOR COVERITY TEST ----------- */
+    char *leak = malloc(256);     // allocated memory, never freed
+    leak[0] = 'A';                // prevent unused-variable warnings
+    /* no free(leak);  <-- intentional leak */
+    /* --------------------------------------------------------------- */
     if (initdone) {
         return RETURN_OK;
     }
